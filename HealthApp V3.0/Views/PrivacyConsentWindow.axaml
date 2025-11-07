@@ -1,0 +1,220 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:HealthApp_V3._0.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="700"
+        x:Class="HealthApp_V3._0.Views.PrivacyConsentWindow"
+        x:DataType="vm:PrivacyConsentViewModel"
+        Title="Privacy Policy &amp; Consent - GDPR Compliance"
+        Width="800" Height="700"
+        MinWidth="700" MinHeight="600"
+        CanResize="True"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F7FA">
+    
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Header -->
+        <Border Grid.Row="0" 
+                Background="White" 
+                BorderBrush="#E5E7EB" 
+                BorderThickness="0,0,0,1"
+                Padding="32,24">
+            <StackPanel Spacing="12">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <TextBlock Text="💚" FontSize="32" VerticalAlignment="Center"/>
+                    <StackPanel>
+                        <TextBlock Text="Health &amp; Fitness" 
+                                  FontSize="24" 
+                                  FontWeight="Bold"
+                                  Foreground="#00D9A5"/>
+                        <TextBlock Text="GDPR-Compliant Health Tracking" 
+                                  FontSize="12"
+                                  Foreground="#6B7280"/>
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock Text="Privacy Policy &amp; Terms of Use" 
+                          FontSize="18"
+                          FontWeight="SemiBold"
+                          Foreground="#1A1A1A"
+                          Margin="0,8,0,0"/>
+                <TextBlock Text="Please read and accept our privacy policy to continue using the app" 
+                          FontSize="14"
+                          Foreground="#6B7280"
+                          TextWrapping="Wrap"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- Content -->
+        <ScrollViewer Grid.Row="1" Padding="32,24">
+            <StackPanel Spacing="20">
+                <!-- Language Selector -->
+                <Border Classes="card" Background="White">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🌐 Select Language / Selecteer Taal" 
+                                  FontWeight="SemiBold"
+                                  FontSize="14"/>
+                        
+                        <!-- Auto-detected language info -->
+                        <Border Background="#F0FDF4" 
+                               Padding="12,8" 
+                               CornerRadius="8"
+                               BorderBrush="#00D9A5"
+                               BorderThickness="1">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock Text="✓" 
+                                          Foreground="#00D9A5" 
+                                          FontWeight="Bold"
+                                          FontSize="16"/>
+                                <TextBlock FontSize="12" Foreground="#166534">
+                                    <Run Text="Gedetecteerd: "/>
+                                    <Run Text="Nederlands (Nederland)" FontWeight="SemiBold"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <Button Content="🇳🇱 Nederlands" 
+                                   Classes="primary"
+                                   Command="{Binding ChangeLanguageCommand}"
+                                   CommandParameter="nl"
+                                   Padding="20,10"
+                                   HorizontalAlignment="Stretch"
+                                   ToolTip.Tip="Standaard voor Nederland"/>
+                            <Button Content="🇬🇧 English" 
+                                   Classes="secondary"
+                                   Command="{Binding ChangeLanguageCommand}"
+                                   CommandParameter="en"
+                                   Padding="20,10"
+                                   HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <!-- GDPR Badge -->
+                <Border Classes="card" Background="#E0F2FE" Padding="16">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBlock Text="🔒" FontSize="24" VerticalAlignment="Center"/>
+                        <StackPanel>
+                            <TextBlock Text="GDPR Compliant" 
+                                      FontWeight="Bold"
+                                      FontSize="14"
+                                      Foreground="#0369A1"/>
+                            <TextBlock Text="Your data is protected according to EU regulations" 
+                                      FontSize="12"
+                                      Foreground="#075985"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Privacy Policy Text -->
+                <Border Classes="card" 
+                       Background="White" 
+                       Padding="24"
+                       MaxHeight="300">
+                    <ScrollViewer>
+                        <TextBlock Text="{Binding PrivacyPolicyText}" 
+                                  TextWrapping="Wrap"
+                                  FontSize="12"
+                                  LineHeight="18"
+                                  Foreground="#374151"
+                                  FontFamily="Consolas,Monaco,monospace"/>
+                    </ScrollViewer>
+                </Border>
+                
+                <!-- GDPR Rights Highlight -->
+                <Border Classes="card" Background="#F0FDF4" Padding="20">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="⚖️ Your Rights Under GDPR" 
+                                  FontWeight="Bold"
+                                  FontSize="14"
+                                  Foreground="#15803D"/>
+                        <ItemsControl>
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="• Right to Access (Art. 15) - View your data" 
+                                          FontSize="12" Foreground="#166534" Margin="12,0,0,0"/>
+                                <TextBlock Text="• Right to Rectification (Art. 16) - Correct your data" 
+                                          FontSize="12" Foreground="#166534" Margin="12,0,0,0"/>
+                                <TextBlock Text="• Right to Erasure (Art. 17) - Delete your data" 
+                                          FontSize="12" Foreground="#166534" Margin="12,0,0,0"/>
+                                <TextBlock Text="• Right to Data Portability (Art. 20) - Export your data" 
+                                          FontSize="12" Foreground="#166534" Margin="12,0,0,0"/>
+                                <TextBlock Text="• Right to Withdraw Consent (Art. 7) - At any time" 
+                                          FontSize="12" Foreground="#166534" Margin="12,0,0,0"/>
+                                <TextBlock Text="• Right to Lodge a Complaint (Art. 77) - With authorities" 
+                                          FontSize="12" Foreground="#166534" Margin="12,0,0,0"/>
+                            </StackPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Consent Checkbox -->
+                <Border Classes="card" Background="White" Padding="24">
+                    <CheckBox IsChecked="{Binding IsAccepted}"
+                             Command="{Binding ToggleAcceptanceCommand}">
+                        <StackPanel Spacing="8">
+                            <TextBlock TextWrapping="Wrap" FontSize="14" Foreground="#1F2937" FontWeight="SemiBold">
+                                ✓ I have read and accept the Privacy Policy and Terms of Use
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="#6B7280">
+                                I understand that:
+                            </TextBlock>
+                            <StackPanel Margin="12,0,0,0" Spacing="4">
+                                <TextBlock Text="• My health data is classified as special category data under GDPR Art. 9" 
+                                          FontSize="11" Foreground="#6B7280" TextWrapping="Wrap"/>
+                                <TextBlock Text="• This data will be processed according to GDPR regulations" 
+                                          FontSize="11" Foreground="#6B7280" TextWrapping="Wrap"/>
+                                <TextBlock Text="• I can withdraw my consent at any time" 
+                                          FontSize="11" Foreground="#6B7280" TextWrapping="Wrap"/>
+                                <TextBlock Text="• I have the right to access, correct, and delete my data" 
+                                          FontSize="11" Foreground="#6B7280" TextWrapping="Wrap"/>
+                                <TextBlock Text="• My data will only be shared with my explicit consent" 
+                                          FontSize="11" Foreground="#6B7280" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </CheckBox>
+                </Border>
+                
+                <!-- Warning -->
+                <Border Classes="card" Background="#FEF3C7" Padding="16">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBlock Text="⚠️" FontSize="20" VerticalAlignment="Top"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="#92400E">
+                            <Run FontWeight="SemiBold">Important:</Run> 
+                            Without accepting this privacy policy, you cannot use the Health &amp; Fitness app. 
+                            Your explicit consent is required to process health data under GDPR Art. 9(2)(a).
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- Footer Actions -->
+        <Border Grid.Row="2" 
+                Background="White" 
+                BorderBrush="#E5E7EB" 
+                BorderThickness="0,1,0,0"
+                Padding="32,20">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock Grid.Column="0" 
+                          Text="Version 1.0 • Last updated: January 1, 2025" 
+                          FontSize="11"
+                          Foreground="#9CA3AF"
+                          VerticalAlignment="Center"/>
+                <Button Grid.Column="1"
+                       Classes="secondary"
+                       Content="Decline &amp; Exit"
+                       Command="{Binding DeclineCommand}"
+                       Margin="0,0,12,0"
+                       Padding="24,12"/>
+                <Button Grid.Column="2"
+                       Classes="primary"
+                       Content="Accept &amp; Continue"
+                       Command="{Binding AcceptAndProceedCommand}"
+                       IsEnabled="{Binding CanProceed}"
+                       Padding="24,12"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
+

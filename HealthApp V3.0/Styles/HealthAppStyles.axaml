@@ -1,0 +1,170 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Samsung Health Color Palette -->
+    <Style.Resources>
+        <!-- Primary Colors -->
+        <SolidColorBrush x:Key="PrimaryGreen">#00D9A5</SolidColorBrush>
+        <SolidColorBrush x:Key="PrimaryGreenDark">#00B88C</SolidColorBrush>
+        <SolidColorBrush x:Key="PrimaryBlue">#4A90E2</SolidColorBrush>
+        <SolidColorBrush x:Key="PrimaryPurple">#9B51E0</SolidColorBrush>
+        
+        <!-- Accent Colors -->
+        <SolidColorBrush x:Key="AccentOrange">#FF6B35</SolidColorBrush>
+        <SolidColorBrush x:Key="AccentRed">#FF4757</SolidColorBrush>
+        <SolidColorBrush x:Key="AccentYellow">#FFC93C</SolidColorBrush>
+        
+        <!-- Background Colors -->
+        <SolidColorBrush x:Key="BackgroundPrimary">#FFFFFF</SolidColorBrush>
+        <SolidColorBrush x:Key="BackgroundSecondary">#F5F7FA</SolidColorBrush>
+        <SolidColorBrush x:Key="BackgroundTertiary">#E8ECF1</SolidColorBrush>
+        <SolidColorBrush x:Key="CardBackground">#FFFFFF</SolidColorBrush>
+        
+        <!-- Text Colors -->
+        <SolidColorBrush x:Key="TextPrimary">#1A1A1A</SolidColorBrush>
+        <SolidColorBrush x:Key="TextSecondary">#6B7280</SolidColorBrush>
+        <SolidColorBrush x:Key="TextTertiary">#9CA3AF</SolidColorBrush>
+        
+        <!-- Border Colors -->
+        <SolidColorBrush x:Key="BorderLight">#E5E7EB</SolidColorBrush>
+        <SolidColorBrush x:Key="BorderMedium">#D1D5DB</SolidColorBrush>
+    </Style.Resources>
+
+    <!-- Card Style (Samsung Health aesthetic) -->
+    <Style Selector="Border.card">
+        <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+        <Setter Property="CornerRadius" Value="16"/>
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="Margin" Value="8"/>
+        <Setter Property="BoxShadow" Value="0 2 8 0 #10000000"/>
+    </Style>
+
+    <!-- Header Text Style -->
+    <Style Selector="TextBlock.header">
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="Margin" Value="0,0,0,16"/>
+    </Style>
+
+    <!-- Subheader Text Style -->
+    <Style Selector="TextBlock.subheader">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="Margin" Value="0,0,0,12"/>
+    </Style>
+
+    <!-- Body Text Style -->
+    <Style Selector="TextBlock.body">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource TextSecondary}"/>
+    </Style>
+
+    <!-- Caption Text Style -->
+    <Style Selector="TextBlock.caption">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="{StaticResource TextTertiary}"/>
+    </Style>
+
+    <!-- Large Number Style (for metrics) -->
+    <Style Selector="TextBlock.metric-large">
+        <Setter Property="FontSize" Value="36"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+    </Style>
+
+    <!-- Primary Button Style -->
+    <Style Selector="Button.primary">
+        <Setter Property="Background" Value="{StaticResource PrimaryGreen}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="20,12"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    
+    <Style Selector="Button.primary:pointerover">
+        <Setter Property="Background" Value="{StaticResource PrimaryGreenDark}"/>
+    </Style>
+
+    <!-- Secondary Button Style -->
+    <Style Selector="Button.secondary">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryGreen}"/>
+        <Setter Property="Padding" Value="20,12"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryGreen}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <!-- Icon Button Style -->
+    <Style Selector="Button.icon-button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    
+    <Style Selector="Button.icon-button:pointerover">
+        <Setter Property="Background" Value="{StaticResource BackgroundSecondary}"/>
+    </Style>
+
+    <!-- Progress Bar Style -->
+    <Style Selector="ProgressBar.health-progress">
+        <Setter Property="Height" Value="8"/>
+        <Setter Property="CornerRadius" Value="4"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryGreen}"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundTertiary}"/>
+    </Style>
+
+    <!-- Text Input Style -->
+    <Style Selector="TextBox.modern-input">
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderLight}"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundPrimary}"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+    
+    <Style Selector="TextBox.modern-input:focus">
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryGreen}"/>
+    </Style>
+
+    <!-- Navigation Button Style -->
+    <Style Selector="Button.nav-button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource TextSecondary}"/>
+        <Setter Property="Padding" Value="20,16"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    
+    <Style Selector="Button.nav-button:pointerover">
+        <Setter Property="Background" Value="{StaticResource BackgroundSecondary}"/>
+    </Style>
+    
+    <Style Selector="Button.nav-button.active">
+        <Setter Property="Background" Value="{StaticResource BackgroundSecondary}"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryGreen}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!-- Stat Card Style -->
+    <Style Selector="Border.stat-card">
+        <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+        <Setter Property="CornerRadius" Value="20"/>
+        <Setter Property="Padding" Value="24"/>
+        <Setter Property="Margin" Value="8"/>
+        <Setter Property="MinHeight" Value="140"/>
+        <Setter Property="BoxShadow" Value="0 4 12 0 #15000000"/>
+    </Style>
+</Styles>
+

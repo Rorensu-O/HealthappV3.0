@@ -1,0 +1,207 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:HealthApp_V3._0.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="650" d:DesignHeight="750"
+        x:Class="HealthApp_V3._0.Views.DataSharingConsentWindow"
+        x:DataType="vm:DataSharingConsentViewModel"
+        Title="Data Sharing Consent - GDPR Compliance"
+        Width="650" Height="750"
+        MinWidth="600" MinHeight="650"
+        CanResize="True"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F7FA">
+    
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Header -->
+        <Border Grid.Row="0" 
+                Background="#4A90E2" 
+                Padding="32,24">
+            <StackPanel Spacing="8">
+                <TextBlock Text="🔐 Data Sharing Consent Required" 
+                          FontSize="20" 
+                          FontWeight="Bold"
+                          Foreground="White"/>
+                <TextBlock Text="GDPR Art. 9(2)(a) - Explicit consent for sharing special category data" 
+                          FontSize="13"
+                          Foreground="#E0F2FE"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- Content -->
+        <ScrollViewer Grid.Row="1" Padding="32,24">
+            <StackPanel Spacing="20">
+                <!-- Recipient Info -->
+                <Border Classes="card" Background="White">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="📋 Sharing Details" 
+                                  FontWeight="SemiBold"
+                                  FontSize="16"/>
+                        <Separator Background="#E5E7EB" Height="1"/>
+                        <Grid ColumnDefinitions="140,*" RowDefinitions="Auto,Auto,Auto" RowSpacing="12">
+                            <TextBlock Grid.Row="0" Grid.Column="0" 
+                                      Text="Recipient Name:" 
+                                      Classes="body"
+                                      FontWeight="SemiBold"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" 
+                                      Text="{Binding RecipientName}" 
+                                      Classes="body"/>
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="0" 
+                                      Text="Email:" 
+                                      Classes="body"
+                                      FontWeight="SemiBold"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" 
+                                      Text="{Binding RecipientEmail}" 
+                                      Classes="body"/>
+                            
+                            <TextBlock Grid.Row="2" Grid.Column="0" 
+                                      Text="Type:" 
+                                      Classes="body"
+                                      FontWeight="SemiBold"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" 
+                                      Text="{Binding RecipientType}" 
+                                      Classes="body"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Consent Text -->
+                <Border Classes="card" 
+                       Background="White" 
+                       MaxHeight="250">
+                    <ScrollViewer>
+                        <TextBlock Text="{Binding ConsentText}" 
+                                  TextWrapping="Wrap"
+                                  FontSize="12"
+                                  LineHeight="18"
+                                  Foreground="#374151"
+                                  FontFamily="Consolas,Monaco,monospace"/>
+                    </ScrollViewer>
+                </Border>
+                
+                <!-- Data Types -->
+                <Border Classes="card" Background="#F0FDF4">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="✅ Data Types Being Shared:" 
+                                  FontWeight="SemiBold"
+                                  FontSize="14"
+                                  Foreground="#15803D"/>
+                        <ItemsControl>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="✓ Steps and activity data" Classes="body" Foreground="#166534" Margin="16,0,0,0"/>
+                                <TextBlock Text="✓ Heart rate measurements" Classes="body" Foreground="#166534" Margin="16,0,0,0"/>
+                                <TextBlock Text="✓ Calories burned" Classes="body" Foreground="#166534" Margin="16,0,0,0"/>
+                                <TextBlock Text="✓ Sleep duration and quality" Classes="body" Foreground="#166534" Margin="16,0,0,0"/>
+                                <TextBlock Text="✓ Distance traveled" Classes="body" Foreground="#166534" Margin="16,0,0,0"/>
+                                <TextBlock Text="✓ Active minutes" Classes="body" Foreground="#166534" Margin="16,0,0,0"/>
+                            </StackPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Security Notice -->
+                <Border Classes="card" Background="#EFF6FF" Padding="16">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBlock Text="🔒" FontSize="24" VerticalAlignment="Top"/>
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Security &amp; Privacy" 
+                                      FontWeight="SemiBold"
+                                      FontSize="13"
+                                      Foreground="#1E40AF"/>
+                            <TextBlock TextWrapping="Wrap" 
+                                      FontSize="11" 
+                                      Foreground="#1E3A8A">
+                                ✓ End-to-end encryption (TLS 1.3)
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" 
+                                      FontSize="11" 
+                                      Foreground="#1E3A8A">
+                                ✓ Read-only access for recipient
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" 
+                                      FontSize="11" 
+                                      Foreground="#1E3A8A">
+                                ✓ Access logs maintained for 6 months
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" 
+                                      FontSize="11" 
+                                      Foreground="#1E3A8A">
+                                ✓ Revoke access at any time
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Consent Checkbox -->
+                <Border Classes="card" Background="White" Padding="20">
+                    <CheckBox IsChecked="{Binding IsAccepted}"
+                             Command="{Binding ToggleAcceptanceCommand}">
+                        <StackPanel Spacing="8">
+                            <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="SemiBold" Foreground="#1F2937">
+                                ✓ I explicitly consent to share my health data with the specified recipient
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="#6B7280">
+                                I confirm that:
+                            </TextBlock>
+                            <StackPanel Margin="12,0,0,0" Spacing="3">
+                                <TextBlock Text="• I understand what data will be shared" 
+                                          FontSize="11" Foreground="#6B7280" TextWrapping="Wrap"/>
+                                <TextBlock Text="• I consent voluntarily without coercion" 
+                                          FontSize="11" Foreground="#6B7280" TextWrapping="Wrap"/>
+                                <TextBlock Text="• I can withdraw this consent at any time" 
+                                          FontSize="11" Foreground="#6B7280" TextWrapping="Wrap"/>
+                                <TextBlock Text="• I understand my rights under GDPR" 
+                                          FontSize="11" Foreground="#6B7280" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </CheckBox>
+                </Border>
+                
+                <!-- Your Rights -->
+                <Border Classes="card" Background="#FEF3C7" Padding="16">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="⚖️ Your Rights" 
+                                  FontWeight="SemiBold"
+                                  FontSize="13"
+                                  Foreground="#92400E"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="11" Foreground="#78350F">
+                            You can revoke access at any time • Request deletion of shared data • 
+                            Restrict data types • Set expiration dates • View access logs • 
+                            Lodge a complaint with data protection authorities
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- Footer Actions -->
+        <Border Grid.Row="2" 
+                Background="White" 
+                BorderBrush="#E5E7EB" 
+                BorderThickness="0,1,0,0"
+                Padding="32,20">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock Grid.Column="0" 
+                          Text="GDPR Art. 9(2)(a) Explicit Consent" 
+                          FontSize="11"
+                          Foreground="#9CA3AF"
+                          VerticalAlignment="Center"/>
+                <Button Grid.Column="1"
+                       Classes="secondary"
+                       Content="Do Not Share"
+                       Command="{Binding DeclineCommand}"
+                       Margin="0,0,12,0"
+                       Padding="24,12"/>
+                <Button Grid.Column="2"
+                       Classes="primary"
+                       Content="I Consent - Share Data"
+                       Command="{Binding AcceptAndProceedCommand}"
+                       IsEnabled="{Binding CanProceed}"
+                       Padding="24,12"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
+

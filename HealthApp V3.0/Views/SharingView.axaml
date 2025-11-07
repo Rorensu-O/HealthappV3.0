@@ -1,0 +1,147 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:HealthApp_V3._0.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="HealthApp_V3._0.Views.SharingView"
+             x:DataType="vm:SharingViewModel">
+    
+    <ScrollViewer>
+        <StackPanel Margin="24" Spacing="20">
+            <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Grid.Column="0"
+                          Text="Share Your Data" 
+                          Classes="header"/>
+                <Button Grid.Column="1"
+                       Classes="primary"
+                       Content="Add Recipient"
+                       Command="{Binding ShowAddRecipientCommand}"/>
+            </Grid>
+            
+            <Border Classes="card" IsVisible="{Binding IsAddingRecipient}">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="Add Recipient" 
+                              Classes="subheader"/>
+                    
+                    <StackPanel Spacing="12">
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Recipient Name" 
+                                      Classes="body"/>
+                            <TextBox Text="{Binding NewRecipientName}" 
+                                    Watermark="Enter name"/>
+                        </StackPanel>
+                        
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Email" 
+                                      Classes="body"/>
+                            <TextBox Text="{Binding NewRecipientEmail}" 
+                                    Watermark="Enter email address"/>
+                        </StackPanel>
+                        
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Type" 
+                                      Classes="body"/>
+                            <ComboBox SelectedIndex="{Binding NewRecipientTypeIndex}" 
+                                     HorizontalAlignment="Stretch">
+                                <ComboBoxItem Content="Doctor"/>
+                                <ComboBoxItem Content="Physiotherapist"/>
+                                <ComboBoxItem Content="Personal Trainer"/>
+                            </ComboBox>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Right">
+                            <Button Classes="secondary"
+                                   Content="Cancel"
+                                   Command="{Binding CancelAddRecipientCommand}"/>
+                            <Button Classes="primary"
+                                   Content="Save"
+                                   Command="{Binding SaveRecipientCommand}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            
+            <Border Classes="card">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="Shared With" 
+                              Classes="subheader"/>
+                    
+                    <ItemsControl ItemsSource="{Binding SharedAccesses}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Classes="card" Background="#F5F7FA" Margin="0,0,0,12">
+                                    <Grid ColumnDefinitions="Auto,*,Auto" RowSpacing="8">
+                                        <Border Grid.Column="0" 
+                                               Width="60" Height="60" 
+                                               CornerRadius="12"
+                                               Background="#00D9A5"
+                                               VerticalAlignment="Top">
+                                            <TextBlock Text="👤" 
+                                                      FontSize="32"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                        </Border>
+                                        
+                                        <StackPanel Grid.Column="1" Spacing="4" Margin="16,0,0,0">
+                                            <TextBlock Text="{Binding RecipientName}" 
+                                                      FontSize="16" FontWeight="SemiBold"/>
+                                            <TextBlock Classes="body">
+                                                <Run Text="{Binding RecipientType}"/>
+                                            </TextBlock>
+                                            <TextBlock Classes="caption">
+                                                <Run Text="📧 "/>
+                                                <Run Text="{Binding RecipientEmail}"/>
+                                            </TextBlock>
+                                            <TextBlock Classes="caption">
+                                                <Run Text="✓ Shared on "/>
+                                                <Run Text="{Binding SharedDate, StringFormat='{}{0:d}'}"/>
+                                            </TextBlock>
+                                            <TextBlock Classes="caption" Foreground="#00D9A5" IsVisible="{Binding IsActive}">
+                                                <Run Text="● Active"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                        
+                                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                            <Button Classes="secondary"
+                                                   Content="Revoke Access"
+                                                   Command="{Binding $parent[UserControl].((vm:SharingViewModel)DataContext).RevokeAccessCommand}"
+                                                   CommandParameter="{Binding Id}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    
+                    <TextBlock Text="No data shared yet. Add a recipient to start sharing."
+                              Classes="body"
+                              HorizontalAlignment="Center"
+                              Margin="0,20,0,0"
+                              IsVisible="{Binding !SharedAccesses.Count}"/>
+                </StackPanel>
+            </Border>
+            
+            <Border Classes="card" Background="#FEF3C7">
+                <StackPanel Spacing="12">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBlock Text="⚠️" FontSize="24"/>
+                        <TextBlock Text="Data Sharing Notice" 
+                                  FontWeight="SemiBold"
+                                  FontSize="14"
+                                  Foreground="#92400E"/>
+                    </StackPanel>
+                    <TextBlock TextWrapping="Wrap" 
+                              FontSize="12" 
+                              Foreground="#78350F">
+                        Your health data is protected under GDPR. When you share data with a recipient, 
+                        they will receive read-only access to your health metrics. You can revoke access 
+                        at any time. All data sharing requires your explicit consent and is encrypted 
+                        during transmission.
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
+

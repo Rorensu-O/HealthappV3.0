@@ -1,0 +1,144 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:HealthApp_V3._0.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="HealthApp_V3._0.Views.DashboardView"
+             x:DataType="vm:DashboardViewModel">
+    
+    <ScrollViewer>
+        <StackPanel Margin="24" Spacing="20">
+            <TextBlock Text="Dashboard" 
+                      Classes="header"/>
+            
+            <Border Classes="card">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="Today" 
+                              Classes="subheader"/>
+                    
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" RowSpacing="12" ColumnSpacing="12">
+                        <Border Grid.Row="0" Grid.Column="0" Classes="stat-card">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Steps" 
+                                          Classes="body"/>
+                                <TextBlock Text="{Binding TodaySummary.TotalSteps, FallbackValue=0}" 
+                                          Classes="metric-large"/>
+                                <ProgressBar Value="{Binding TodaySummary.StepProgress}" 
+                                           Maximum="100"
+                                           Classes="health-progress"/>
+                                <TextBlock Classes="caption">
+                                    <Run Text="Goal: "/>
+                                    <Run Text="{Binding TodaySummary.StepGoal, FallbackValue=10000}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border Grid.Row="0" Grid.Column="1" Classes="stat-card">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Calories" 
+                                          Classes="body"/>
+                                <StackPanel Orientation="Horizontal" Spacing="4">
+                                    <TextBlock Text="{Binding TodaySummary.TotalCalories, StringFormat='{}{0:F0}', FallbackValue=0}" 
+                                              Classes="metric-large"/>
+                                    <TextBlock Text="kcal" 
+                                              Classes="body"
+                                              VerticalAlignment="Bottom"
+                                              Margin="0,0,0,8"/>
+                                </StackPanel>
+                                <ProgressBar Value="{Binding TodaySummary.CalorieProgress}" 
+                                           Maximum="100"
+                                           Classes="health-progress"/>
+                                <TextBlock Classes="caption">
+                                    <Run Text="Goal: "/>
+                                    <Run Text="{Binding TodaySummary.CalorieGoal, StringFormat='{}{0:F0}', FallbackValue=2000}"/>
+                                    <Run Text=" kcal"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border Grid.Row="1" Grid.Column="0" Classes="stat-card">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Heart Rate" 
+                                          Classes="body"/>
+                                <StackPanel Orientation="Horizontal" Spacing="4">
+                                    <TextBlock Text="{Binding TodaySummary.AvgHeartRate, FallbackValue=0}" 
+                                              Classes="metric-large"/>
+                                    <TextBlock Text="bpm" 
+                                              Classes="body"
+                                              VerticalAlignment="Bottom"
+                                              Margin="0,0,0,8"/>
+                                </StackPanel>
+                                <TextBlock Classes="caption">
+                                    <Run Text="Max: "/>
+                                    <Run Text="{Binding TodaySummary.MaxHeartRate, FallbackValue=0}"/>
+                                    <Run Text=" / Min: "/>
+                                    <Run Text="{Binding TodaySummary.MinHeartRate, FallbackValue=0}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border Grid.Row="1" Grid.Column="1" Classes="stat-card">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Distance" 
+                                          Classes="body"/>
+                                <StackPanel Orientation="Horizontal" Spacing="4">
+                                    <TextBlock Text="{Binding TodaySummary.TotalDistance, StringFormat='{}{0:F2}', FallbackValue=0}" 
+                                              Classes="metric-large"/>
+                                    <TextBlock Text="km" 
+                                              Classes="body"
+                                              VerticalAlignment="Bottom"
+                                              Margin="0,0,0,8"/>
+                                </StackPanel>
+                                <TextBlock Classes="caption">
+                                    <Run Text="Active Minutes: "/>
+                                    <Run Text="{Binding TodaySummary.ActiveMinutes, StringFormat='{}{0:F0}', FallbackValue=0}"/>
+                                    <Run Text=" min"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            
+            <Border Classes="card">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="This Week" 
+                              Classes="subheader"/>
+                    
+                    <Grid ColumnDefinitions="*,*,*" RowSpacing="16" ColumnSpacing="16">
+                        <StackPanel Grid.Column="0" Spacing="4">
+                            <TextBlock Text="Steps" 
+                                      Classes="body"/>
+                            <TextBlock Text="{Binding WeeklySummary.TotalSteps, StringFormat='{}{0:N0}', FallbackValue=0}" 
+                                      FontSize="24" FontWeight="Bold"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Column="1" Spacing="4">
+                            <TextBlock Text="Distance" 
+                                      Classes="body"/>
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock Text="{Binding WeeklySummary.TotalDistance, StringFormat='{}{0:F1}', FallbackValue=0}" 
+                                          FontSize="24" FontWeight="Bold"/>
+                                <TextBlock Text="km" 
+                                          Classes="body" VerticalAlignment="Bottom" Margin="0,0,0,4"/>
+                            </StackPanel>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Column="2" Spacing="4">
+                            <TextBlock Text="Calories" 
+                                      Classes="body"/>
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock Text="{Binding WeeklySummary.TotalCalories, StringFormat='{}{0:F0}', FallbackValue=0}" 
+                                          FontSize="24" FontWeight="Bold"/>
+                                <TextBlock Text="kcal" 
+                                          Classes="body" VerticalAlignment="Bottom" Margin="0,0,0,4"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
+

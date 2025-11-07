@@ -1,0 +1,143 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:HealthApp_V3._0.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="HealthApp_V3._0.Views.DevicesView"
+             x:DataType="vm:DevicesViewModel">
+    
+    <ScrollViewer>
+        <StackPanel Margin="24" Spacing="20">
+            <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Grid.Column="0"
+                          Text="Devices" 
+                          Classes="header"/>
+                <Button Grid.Column="1"
+                       Classes="primary"
+                       Content="Scan Devices"
+                       Command="{Binding ScanDevicesCommand}"
+                       IsEnabled="{Binding !IsScanning}"/>
+            </Grid>
+            
+            <Border Classes="card">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="Connected Devices" 
+                              Classes="subheader"/>
+                    
+                    <ItemsControl ItemsSource="{Binding ConnectedDevices}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Classes="card" Background="#F5F7FA" Margin="0,0,0,12">
+                                    <Grid ColumnDefinitions="Auto,*,Auto" RowSpacing="8">
+                                        <Border Grid.Column="0" 
+                                               Width="60" Height="60" 
+                                               CornerRadius="12"
+                                               Background="#00D9A5"
+                                               VerticalAlignment="Top">
+                                            <TextBlock Text="📱" 
+                                                      FontSize="32"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                        </Border>
+                                        
+                                        <StackPanel Grid.Column="1" Spacing="4" Margin="16,0,0,0">
+                                            <TextBlock Text="{Binding Name}" 
+                                                      FontSize="16" FontWeight="SemiBold"/>
+                                            <TextBlock Classes="body">
+                                                <Run Text="{Binding Manufacturer}"/>
+                                                <Run Text=" • "/>
+                                                <Run Text="{Binding Type}"/>
+                                            </TextBlock>
+                                            <StackPanel Orientation="Horizontal" Spacing="16">
+                                                <TextBlock Classes="caption">
+                                                    <Run Text="🔋 "/>
+                                                    <Run Text="{Binding BatteryLevel}"/>
+                                                    <Run Text="%"/>
+                                                </TextBlock>
+                                                <TextBlock Classes="caption">
+                                                    <Run Text="🔄 "/>
+                                                    <Run Text="{Binding LastSyncTime, StringFormat='{}{0:HH:mm}', FallbackValue='Never'}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                            <Button Classes="secondary"
+                                                   Content="Sync"
+                                                   Command="{Binding $parent[UserControl].((vm:DevicesViewModel)DataContext).SyncDeviceCommand}"
+                                                   CommandParameter="{Binding Id}"/>
+                                            <Button Classes="secondary"
+                                                   Content="Disconnect"
+                                                   Command="{Binding $parent[UserControl].((vm:DevicesViewModel)DataContext).DisconnectDeviceCommand}"
+                                                   CommandParameter="{Binding Id}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    
+                    <TextBlock Text="No connected devices. Scan to find devices."
+                              Classes="body"
+                              HorizontalAlignment="Center"
+                              Margin="0,20,0,0"
+                              IsVisible="{Binding !ConnectedDevices.Count}"/>
+                </StackPanel>
+            </Border>
+            
+            <Border Classes="card" IsVisible="{Binding AvailableDevices.Count}">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="Available Devices" 
+                              Classes="subheader"/>
+                    
+                    <ItemsControl ItemsSource="{Binding AvailableDevices}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Classes="card" Background="#F5F7FA" Margin="0,0,0,12">
+                                    <Grid ColumnDefinitions="Auto,*,Auto">
+                                        <Border Grid.Column="0" 
+                                               Width="60" Height="60" 
+                                               CornerRadius="12"
+                                               Background="#E8ECF1">
+                                            <TextBlock Text="📱" 
+                                                      FontSize="32"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                        </Border>
+                                        
+                                        <StackPanel Grid.Column="1" Spacing="4" Margin="16,0,0,0" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" 
+                                                      FontSize="16" FontWeight="SemiBold"/>
+                                            <TextBlock Classes="body">
+                                                <Run Text="{Binding Manufacturer}"/>
+                                                <Run Text=" • "/>
+                                                <Run Text="{Binding Type}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                        
+                                        <Button Grid.Column="2"
+                                               Classes="primary"
+                                               Content="Connect"
+                                               Command="{Binding $parent[UserControl].((vm:DevicesViewModel)DataContext).ConnectDeviceCommand}"
+                                               CommandParameter="{Binding Id}"
+                                               IsEnabled="{Binding !IsConnected}"
+                                               VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+            
+            <Border Classes="card" IsVisible="{Binding IsScanning}">
+                <StackPanel Spacing="12" HorizontalAlignment="Center">
+                    <ProgressBar IsIndeterminate="True" Width="200"/>
+                    <TextBlock Text="Scanning for devices..." Classes="body"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
+

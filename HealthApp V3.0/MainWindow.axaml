@@ -1,0 +1,135 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:HealthApp_V3._0.ViewModels"
+        xmlns:views="using:HealthApp_V3._0.Views"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="700"
+        x:Class="HealthApp_V3._0.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Health &amp; Fitness"
+        Width="1200" Height="700"
+        MinWidth="900" MinHeight="600"
+        Background="#F5F7FA">
+    
+    <Grid ColumnDefinitions="260,*">
+        <!-- Sidebar Navigation -->
+        <Border Grid.Column="0" 
+                Background="White"
+                BorderBrush="#E5E7EB" 
+                BorderThickness="0,0,1,0">
+            <StackPanel Spacing="8" Margin="0,24,0,0">
+                <!-- App Title -->
+                <StackPanel Margin="20,0,20,24">
+                    <TextBlock Text="💚 Health &amp; Fitness" 
+                              FontSize="20" 
+                              FontWeight="Bold"
+                              Foreground="#00D9A5"/>
+                </StackPanel>
+                
+                <!-- Navigation Buttons -->
+                <Button Classes="nav-button"
+                        Classes.active="{Binding SelectedTab, Converter={x:Static ObjectConverters.Equal}, ConverterParameter=Dashboard}"
+                        Command="{Binding NavigateToDashboardCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBlock Text="📊" FontSize="18"/>
+                        <TextBlock Text="Dashboard"/>
+                    </StackPanel>
+                </Button>
+                
+                <Button Classes="nav-button"
+                        Classes.active="{Binding SelectedTab, Converter={x:Static ObjectConverters.Equal}, ConverterParameter=Devices}"
+                        Command="{Binding NavigateToDevicesCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBlock Text="📱" FontSize="18"/>
+                        <TextBlock Text="Devices"/>
+                    </StackPanel>
+                </Button>
+                
+                <Button Classes="nav-button"
+                        Classes.active="{Binding SelectedTab, Converter={x:Static ObjectConverters.Equal}, ConverterParameter=Sharing}"
+                        Command="{Binding NavigateToSharingCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBlock Text="👥" FontSize="18"/>
+                        <TextBlock Text="Sharing"/>
+                    </StackPanel>
+                </Button>
+                
+                <!-- Language Selector -->
+                <Border Margin="20,40,20,0" 
+                       BorderBrush="#E5E7EB" 
+                       BorderThickness="0,1,0,0" 
+                       Padding="0,20,0,0">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Language / Taal" 
+                                  Classes="caption"
+                                  FontWeight="SemiBold"/>
+                        
+                        <!-- Language Toggle Button (Primary) -->
+                        <ToggleButton x:Name="LanguageToggle"
+                                     Classes="secondary"
+                                     Command="{Binding ChangeLanguageCommand}"
+                                     CommandParameter="nl"
+                                     FontSize="13"
+                                     Padding="16,8"
+                                     HorizontalAlignment="Stretch"
+                                     HorizontalContentAlignment="Center">
+                            <ToggleButton.Content>
+                                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                                    <TextBlock Text="🌐" FontSize="16"/>
+                                    <TextBlock Text="Nederlands" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </ToggleButton.Content>
+                        </ToggleButton>
+                        
+                        <!-- Individual Language Buttons -->
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Content="🇳🇱 NL" 
+                                   Classes="secondary"
+                                   Command="{Binding ChangeLanguageCommand}"
+                                   CommandParameter="nl"
+                                   FontSize="12"
+                                   Padding="12,6"
+                                   ToolTip.Tip="Nederlands (Nederland)"
+                                   HorizontalAlignment="Stretch"
+                                   Width="70"/>
+                            <Button Content="🇬🇧 EN" 
+                                   Classes="secondary"
+                                   Command="{Binding ChangeLanguageCommand}"
+                                   CommandParameter="en"
+                                   FontSize="12"
+                                   Padding="12,6"
+                                   ToolTip.Tip="English"
+                                   HorizontalAlignment="Stretch"
+                                   Width="70"/>
+                        </StackPanel>
+                        
+                        <!-- Auto-detected info -->
+                        <TextBlock Classes="caption"
+                                  FontSize="10"
+                                  Foreground="#9CA3AF"
+                                  TextWrapping="Wrap">
+                            <Run Text="🌍 "/>
+                            <Run Text="Auto: Nederlands (NL)"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Border>
+        
+        <!-- Main Content Area -->
+        <ContentControl Grid.Column="1" Content="{Binding CurrentView}">
+            <ContentControl.DataTemplates>
+                <DataTemplate DataType="vm:DashboardViewModel">
+                    <views:DashboardView/>
+                </DataTemplate>
+                <DataTemplate DataType="vm:DevicesViewModel">
+                    <views:DevicesView/>
+                </DataTemplate>
+                <DataTemplate DataType="vm:SharingViewModel">
+                    <views:SharingView/>
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
+    </Grid>
+</Window>

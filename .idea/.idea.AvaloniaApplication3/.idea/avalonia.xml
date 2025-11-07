@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="HealthApp V3.0/MainWindow.axaml" value="HealthApp V3.0/HealthApp V3.0.csproj" />
+        <entry key="HealthApp V3.0/Views/DashboardView.axaml" value="HealthApp V3.0/HealthApp V3.0.csproj" />
+        <entry key="HealthApp V3.0/Views/DevicesView.axaml" value="HealthApp V3.0/HealthApp V3.0.csproj" />
+        <entry key="HealthApp V3.0/Views/SharingView.axaml" value="HealthApp V3.0/HealthApp V3.0.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
