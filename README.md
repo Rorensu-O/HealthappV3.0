@@ -65,8 +65,8 @@ A modern, GDPR-compliant health tracking application built with Avalonia UI and 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR-USERNAME/health-fitness-app.git
-   cd health-fitness-app
+   git clone https://github.com/Rorensu-O/HealthappV3.0.git
+   cd HealthappV3.0
    ```
 
 2. **Navigate to project folder**
@@ -303,9 +303,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-**Project Link**: [https://github.com/YOUR-USERNAME/health-fitness-app](https://github.com/YOUR-USERNAME/health-fitness-app)
+**Project Link**: [https://github.com/Rorensu-O/HealthappV3.0](https://github.com/Rorensu-O/HealthappV3.0)
 
 **University Project**: Created as part of software development coursework
+
+> **📌 For Teacher Review**: This repository is public for academic evaluation. See [MAKE_REPOSITORY_PUBLIC.md](MAKE_REPOSITORY_PUBLIC.md) for visibility settings.
 
 ## 🎓 University Demonstration
 
